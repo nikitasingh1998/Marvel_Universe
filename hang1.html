@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<style>
+
+#home{
+		padding:20px;
+		color:white;
+		background-color:red;
+		position:absolute;
+		top:530px;
+		left:1100px;
+		}
+		
+		
+#gamehome{
+		padding:20px;
+		color:white;
+		background-color:red;
+		position:absolute;
+		top:460px;
+		left:1100px;
+		}
+		
+body{
+		background-image: url("galaxy.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+	text-align: center;
+	font-family: Helvetica, sans-serif;
+	}
+		
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+
+
+	text-align: center;
+	font-family: Helvetica, sans-serif;
+}
+input {
+	border: 2px solid #999;
+	font-family: Helvetica, sans-serif;
+	color: white;
+}
+
+#ratefield {
+	font-family: 'Permanent Marker', 'cursive';
+	font-size: 2.0em;
+	color:white;
+}
+
+h1 {
+	font-family: 'Permanent Marker', 'cursive';
+	color:white;
+}
+
+
+
+</style>
+<script>
+var words = [
+["T", "H", "O", "R"],
+  ["C","A","P","T","A","I","N","A","M","E","R","I","C","A"],
+  ["I","R","O","N","M","A","N"],
+  ["H","U","L","K"],
+  ["W","O","N","D","E","R","W","O","M","A","N"],
+  ["L","O","K","I"]
+]
+var random = Math.floor((Math.random()*(words.length-1))); 
+
+var lword = words[random]; // the word to guess will be chosen from the array above
+var rateword = new Array(lword.length);
+var maxwrong = 0;
+
+// every letter in the word is symbolized by an underscore in the guessfield
+for (var i = 0; i < rateword.length; i++){
+	rateword[i] = "_ ";
+}
+
+// prints the guessfield
+function printrateword(){
+	for (var i = 0; i < rateword.length; i++){
+	var ratefield = document.getElementById("ratefield");
+	var textnode= document.createTextNode(rateword[i]);
+	ratefield.appendChild(textnode);
+	}
+}
+
+//checks if the the letter provided by the user matches one or more of the letters in the word
+var guessword = function(){
+	var f = document.hangman; 
+	var b = f.elements["uletter"]; 
+	var letter = b.value; // the letter provided by the user
+	letter = letter.toUpperCase();
+	for (var i = 0; i < lword.length; i++){
+		if(lword[i] === letter){
+			rateword[i] = letter + " ";
+			var cword = true;
+		}
+	b.value = "";
+	}
+	
+	//deletes the guessfield and replaces it with the new one
+	var ratefield = document.getElementById("ratefield");
+	ratefield.innerHTML=""; 
+	printrateword();
+	
+	// if a guessed letter is not in the word, the letter will be put on the "wrong letters"-list and hangman grows
+	if(!cword){
+		var wrongletter = document.getElementById("wrongletter");
+		var textnode= document.createTextNode(" " + letter);
+		wrongletter.appendChild(textnode); 
+		maxwrong++;
+		var hangman = document.getElementById("hangman");
+    hangman.src = "http://www.writteninpencil.de/Projekte/Hangman/hangman" + maxwrong + ".png";
+	}
+	
+	//checks if all letters have been found
+	var all = true;
+	for (var i = 0; i < rateword.length; i++){
+		if(rateword[i] === "_ "){
+			all = false;
+		}
+	}
+	if(all){
+		window.alert("You win!");
+	}
+	
+	//once you got six wrong letters, you lose
+	if(maxwrong === 6){
+		window.alert("Uh...I guess you're dead now.");
+	}
+}
+
+function init(){
+	printrateword();
+}
+
+window.onload = init;
+</script>
+
+<body>
+<h1>Hangman<br>
+  Your favorite marvel heroes... LETS SEE HOW WELL YOU KNOW THEM</h1>
+<p id="ratefield"></p>
+<form name="hangman">
+<input name="uletter" type="text" size="5" maxlength="1">
+<input name="ratebutton" type="button" value="Guess" onClick="guessword()">
+
+<p id="wrongletter">Wrong Letters:</p>
+<img src="hangman0.png" id="hangman"><br />
+<input name="refresh" type="button" value="New Game" onClick="location.reload()">
+</form>
+
+
+	
+		<a href="game.html">
+	<button id="gamehome" > BACK TO GAMES </button></a>
+	<a href="marvel2.html">
+	<button id="home" > BACK TO HOME </button></a>
+</body>
+
+</html>

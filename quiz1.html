@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+#starttest{position:relative;
+			left:200px;
+			top:200px;
+			padding:50px;}
+#l1{color:grey;}
+#l2{color:white;
+	font-size:20px;}
+#main{position:absolute;
+		top:20px;
+		width: 1700px;
+		height: 500px;
+		border:2px solid black;
+		padding:150px 500px 100px 150px;
+		text-align:left;
+		 box-sizing: border-box;}
+form{align:left;
+	text-align:left;
+	font-family:Veranda}
+	
+#rev1{position:relative;
+	top:420px;
+	left:125px;
+	text-align:center;
+	cursor: pointer;
+	margin: 4px 2px;
+	display: inline-block;
+	padding: 16px 32px;
+	background-color:royalblue;
+	border: 1px solid blue	;}
+#scan{position:relative;
+	top:420px;
+	left:500px;
+	text-align:center;
+	cursor: pointer;
+	margin: 4px 2px;
+	display: inline-block;
+	padding: 16px 32px;
+	background-color:royalblue;
+	border: 1px solid blue	;}
+		
+div.max{border:1px solid blue;
+	padding:2px;
+	position:absolute;
+	top:0px;
+	left:805px;}
+div.info{padding:49px;
+		position:absolute;
+		top:5px;
+		left:1000px;}
+img.dp{height:40px;
+	width:40px;}
+
+div.num{position:absolute;
+		top:200px;
+		left:1000px;}	
+/*.button {
+    background-color: orange; 
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+	font-weight:bold;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius:50%;
+}
+button:hover{background-color:grey;}*/
+
+#end{padding:20px;
+	position:absolute;
+	bottom:10px;
+	left:1200px;
+	background-color:black;
+	color:white;}
+
+#starttest{position:absolute;
+		top:50px;
+		left:	600px;
+		text-align:left;
+		
+		}
+
+.page{
+	position: absolute;
+	top: 10;
+	left: 100;
+	visibility: hidden;
+}
+
+#N1,#N2,#N3,#N4,#N5,#N6,#N7,#N8,#N9,#N10,#N11,#N12,#N13,#N14,#N15,#N16,#N17,#N18,#N19{
+	position:absolute;
+	top:420px;
+	left:700px;
+	text-align:center;
+	cursor: pointer;
+	margin: 4px 2px;
+	display: inline-block;
+	padding: 16px 32px;
+	background-color:LightBlue;
+	border: 1px solid blue	;	 }	
+
+#P2,#P3,#P4,#P5,#P6,#P7,#P8,#P9,#P10,#P11,#P12,#P13,#P14,#P15,#P16,#P17,#P18,#P19,#P20{
+	position:absolute;
+	top:420px;
+	left:150px;
+	text-align:center;
+	cursor: pointer;
+	margin: 4px 2px;
+	display: inline-block;
+	padding: 16px 32px;
+	background-color:LightBlue;
+	border: 1px solid blue;}
+
+body{
+		background-image: url("galaxy.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		color:white;
+		}
+	
+</style>
+<script >
+var currentLayer = 'page0';
+function showLayer(lyr){
+	hideLayer(currentLayer);
+	document.getElementById(lyr).style.visibility = 'visible';
+	currentLayer = lyr;
+}
+
+function hideLayer(lyr){
+	document.getElementById(lyr).style.visibility = 'hidden';
+}
+
+</script>
+
+</head>
+
+<body>
+<a href="marvel2.html">
+<img src="logoe.png" alt="MARVEL" width="304px" height="125px" style="position:relative;top:0px;left:10px";/></a>
+
+<h1>MARVEL QUIZ </h1>
+
+<form id="multiForm" method="POST" action="javascript:void(0)">
+<div id="page0" class="page" style="visibility:visible;">
+  <p><input type="button" id="starttest" value="START QUIZ" onClick="showLayer('page1')"></p>
+</div>
+
+
+<div id="page1" class="page" >
+				<div id="main">
+		<form action="answer.php" method="get">
+		
+				1. What is the correct logo for iron man :
+				<p>
+				<input type="radio" value="1" name="one"><img src="hulklogo.jpg" width="100px" height="100px"></input>
+				<input type="radio" value="2" name="one"><img src="spiderlogo.jpg" width="100px" height="100px"></input>
+				//<input type="radio" value="3" name="one"><img src="ironlogo.jpg" width="100px" height="100px"></input>
+				<input type="radio" value="4" name="one"><img src="cplogo.png" width="100px" height="100px"></input>
+				</p>
+			
+	</form>
+	</div>
+  <p>
+  <input type="button" id="N1" value="Next" onClick="showLayer('page2')"></p>
+
+</div>
+
+
+<div id="page2" class="page">
+			<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				2. Which two actors have played Howard Stark (Tony Stark's dad) in the Marvel Cinematic Universe?</br>
+				<input type="radio" value="1" name="two"> Dominic Cooper and Jeff Bridges </input></br>
+				//<input type="radio" value="2" name="two"> Hohn Slattery and Dominic Cooper </input></br>
+				<input type="radio" value="3" name="two">  Sebastian Stan and Dominic Cooper </input></br>
+				<input type="radio" value="4" name="two">   John Slattery and Jeff Bridges </input></br>
+	
+			</div>
+	</form>
+	</div>
+  <p>
+				<input type="button" id="P2" value="Previous" onClick="showLayer('page1')">
+				<input type="button" id="N2" value="Next" onClick="showLayer('page3')"></p>
+</div>
+
+<div id="page3" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				3.What weapon is Fandral known best to use?</br>
+				<input type="radio" value="1" name="three" >Bow and arrow</input></br>
+				<input type="radio" value="2" name="three" >Axe</input></br>
+				//<input type="radio" value="3" name="three">Rapier</input></br>
+				<input type="radio" value="4" name="three" >A Pair of Daggers</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P2" value="Previous" onClick="showLayer('page2')">
+  <input type="button" id="N3" value="Next" onClick="showLayer('page4')"></p>
+</div>
+
+<div id="page4" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				4."I will bathe the star-ways with your blood." Who said it?</br>
+				//<input type="radio" value="1" name="four" >Thanos</input></br>
+				<input type="radio" value="2" name="four" >Loki</input></br>
+				<input type="radio" value="3" name="four">Heimdall</input></br>
+				<input type="radio" value="4" name="four" >Ronan The Accuser</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P4" value="Previous" onClick="showLayer('page3')">
+  <input type="button" id="N4" value="Next" onClick="showLayer('page5')"></p>
+</div>
+
+<div id="page5" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				5.What did Peggy Carter promise to Steve Rogers (Captain America) before he crashed Red Skull's bomber?</br>
+				//<input type="radio" value="1" name="five" >A Dance</input></br>
+				<input type="radio" value="2" name="five" >Fondue</input></br>
+				<input type="radio" value="3" name="five">A Kiss</input></br>
+				<input type="radio" value="4" name="five" >A Higher Clearence Level</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P5" value="Previous" onClick="showLayer('page4')">
+  <input type="button" id="N5" value="Next" onClick="showLayer('page6')"></p>
+</div>
+
+<div id="page6" class="page" >
+				<div id="main">
+		<form action="answer.php" method="get">
+			<div id="ques">
+				6.Who ends up with the Aether after the events of 'Thor: The Dark World'?</br>
+				//<input type="radio" value="1" name="six" >The Collector</input></br>
+				<input type="radio" value="2" name="six" >Jane Foster</input></br>
+				<input type="radio" value="3" name="six">Thor and his Companions</input></br>
+				<input type="radio" value="4" name="six" >Algrim</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P6" value="Previous" onClick="showLayer('page5')">
+  <input type="button" id="N6" value="Next" onClick="showLayer('page7')"></p>
+</div>
+
+<div id="page7" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				7.What classic video game does Tony Stark catch someone playing on the S.H.I.E.L.D. heli-carrier in 'The Avengers'?</br>
+				<input type="radio" value="1" name="seven" >Donkey Kong</input></br>
+				//<input type="radio" value="2" name="seven" >Galaga</input></br>
+				<input type="radio" value="3" name="seven">Pac-man</input></br>
+				<input type="radio" value="4" name="seven" >Space Invaders</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P7" value="Previous" onClick="showLayer('page6')">
+  <input type="button" id="N7" value="Next" onClick="showLayer('page8')"></p>
+</div>
+
+<div id="page8" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				8.In which Marvel movie did Samuel L. Jackson first appear as Nick Fury?</br>
+				<input type="radio" value="1" name="eight" >Iron man 2</input></br>
+				<input type="radio" value="2" name="eight" >Thor</input></br>
+				<input type="radio" value="3" name="eight">The Incredible Hulk</input></br>
+				//<input type="radio" value="4" name="eight" >Iron Man</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P8" value="Previous" onClick="showLayer('page7')">
+  <input type="button" id="N8" value="Next" onClick="showLayer('page9')"></p>
+</div>
+
+<div id="page9" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				9.Forged in the heart of a dying star, what is Thor's hammer's name?</br>
+				//<input type="radio" value="1" name="nine" >Mjolnir</input></br>
+				<input type="radio" value="2" name="nine" >Thunder Bringer</input></br>
+				<input type="radio" value="3" name="nine">Fjordir</input></br>
+				<input type="radio" value="4" name="nine" >Anduril</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P9" value="Previous" onClick="showLayer('page8')">
+  <input type="button" id="N9" value="Next" onClick="showLayer('page10')"></p>
+</div>
+
+<div id="page10" class="page" >
+				<div id="main">
+
+		<form action="answer.php" method="get">
+			<div id="ques">
+				10.What's Hawkeye's real name?</br>
+				<input type="radio" value="1" name="" >Barton Carter</input></br>
+				<input type="radio" value="2" name="one" >Clint Coulson</input></br>
+				//<input type="radio" value="3" name="one">Clint Barton</input></br>
+				<input type="radio" value="4" name="one" >Bart Clinton</input></br>
+
+			</div>
+	</form>
+	</div>
+  <p>
+  <input type="button" id="P10" value="Previous" onClick="showLayer('page9')">
+  <input type="button" id="N10" value="Next" onClick="showLayer('page11')"></p>
+</div>
+
+
+	
+	<a href="result.html"><input type="button" value="END quiz" id="end"/></a>
+</body>
+</html>

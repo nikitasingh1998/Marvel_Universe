@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+		background-image: url("galaxy.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		color:white;
+	}
+		
+img.block{	border-radius:50%;}
+		tr,td{padding: 50%;}
+		
+h1{position:absolute;
+	left:480px;
+	top:20px}
+
+div.pic{position:absolute;
+		left:200px;
+		top:150px;
+		transition:width 3s, height 5s,transform 2s;}
+		
+div.pic:hover{
+		transform: rotate3d(360deg);}
+	
+
+img.block{
+		transition:width 6s, height 6s,transform 2s;}
+
+img.block:hover{
+		width:350px;
+		height:250px;
+		transform: rotate3d(360deg);}
+#home{
+		padding:20px;
+		color:white;
+		background-color:red;
+		position:absolute;
+		top:730px;
+		left:1100px;
+		}
+
+	
+</style>
+
+</head>
+<body>
+<a href="marvel2.html">
+<img src="logoe.png" alt="MARVEL" width="304px" height="125px" style="position:relative;top:0px;left:10px";/></a>
+
+	<h1> MARVEL HEROES</h1>
+	
+	<div class="pic">
+	<a href="spider.html"><img class="block" src="spiderman.jpg" id="i1" onClick="spiderman()" title="spiderman"/></a>
+	<a href="captian_marvel.html"><img class="block" src="captian_marvel.jpg" id="i2" onclick="captian_marvel()" title="superwoman"/></a>
+	<a href="iron_man.html"><img class="block" src="iron_man.jpg" id="i3" onclick="iron_man()" title="iron man"/></a></br>
+	<a href="hulk.html"><img class="block" src="hulk.jpg" id="i4" onclick="hulk()" title="hulk"/></a>
+	<a href="captian_america.html"><img class="block" src="captian_america.jpg" id="i5" onclick="captian_america()" title="caption america"/></a>
+	<a href="daredevil.html"><img class="block" src="daredevil.jpg" id="i6" onclick="thor()" title="daredevil"/></a></br>
+	<a href="bw.html"><img class="block" src="bw.jpg" id="i6" onclick="thor()" title="black widow"/></a>
+	<a href="thor.html"><img class="block" src="thor.jpg" id="i6" onclick="thor()" title="thor"/></a>
+	<a href="wolverine.html"><img class="block" src="wolverine.jpg" id="i6" onclick="thor()" title="wolverine"/></a>
+	
+	</div>
+	<a href="marvel2.html">
+	<button id="home" > BACK TO HOME </button></a>
+</body>
+<script>
+</script>
+</html>
+
+

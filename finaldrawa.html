@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+    var canvas, ctx, flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var x = "black",
+        y = 9;
+    
+    function init()
+	{
+        canvas = document.getElementById('can');
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+    
+		//	base_image = new Image();
+		//	base_image.src = 'apple.jpg';
+		//	base_image.z-index='-1';
+		//	base_image.onload = function(){
+		//	ctx.drawImage(base_image, 0,0,100, 100);}
+		
+		
+        canvas.addEventListener("mousemove", function (e) {findxy('move', e)}, false);
+        canvas.addEventListener("mousedown", function (e) {findxy('down', e)}, false);
+        canvas.addEventListener("mouseup", function (e) {findxy('up', e)}, false);
+        canvas.addEventListener("mouseout", function (e) {findxy('out', e)}, false);
+		
+		
+    }
+    
+    function color(obj)
+	{
+        switch (obj.id)
+		{
+            case "black":
+                x = "black";
+                break;
+            case "dblue":
+                x = "darkblue";
+                break;
+            case "blue":
+                x = "blue";
+                break;
+            case "lblue":
+                x = "cyan";
+                break;
+            case "dgreen":
+                x = "darkgreen";
+                break;
+            case "lgreen":
+                x = "lime";
+                break;
+            case "yellow":
+                x = "yellow";
+                break;
+            case "orange":
+                x = "orange";
+                break;
+            case "red":
+                x = "red";
+                break;
+            case "magenta":
+                x = "magenta";
+                break;
+            case "pink":
+                x = "pink";
+                break;
+            case "brown":
+                x = "brown";
+                break;
+            case "white":
+                x = "white";
+                break;
+        }
+        if (x == "white")
+			y = 14;
+        else 
+			y = 9;
+    
+    }
+    
+    function draw()
+	{
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+		//ctx.globalAlpha = 0.2;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    
+    function erase()
+	{
+        var m = confirm("Want to clear");
+        if (m) 
+		{
+            ctx.clearRect(0, 0, w, h);
+            document.getElementById("canvasimg").style.display = "none";
+        }
+    }
+    
+    /*function save() 
+	{
+        document.getElementById("canvasimg").style.border = "2px solid";
+        var dataURL = canvas.toDataURL();
+        document.getElementById("canvasimg").src = dataURL;
+        document.getElementById("canvasimg").style.display = "inline";
+    }*/
+    
+    function findxy(res, e) 
+	{
+        if (res == 'down')
+		{
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag)
+			{
+                ctx.beginPath();
+                ctx.fillStyle = x;
+				//ctx.globalAlpha = 0.8;
+                ctx.fillRect(currX, currY, 2, 2);
+				//ctx.globalAlpha = 1.0;
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out")
+		{
+            flag = false;
+        }
+        if (res == 'move')
+		{
+            if (flag) 
+			{
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                draw();
+            }
+        }
+    }
+			
+		var currentLayer = 'page0';
+		function showLayer(lyr)
+		{
+			hideLayer(currentLayer);
+			document.getElementById(lyr).style.visibility = 'visible';
+			currentLayer = lyr;
+		}
+
+		function hideLayer(lyr)
+		{
+			document.getElementById(lyr).style.visibility = 'hidden';
+		}
+	</script>
+	<style> 
+	
+		body{
+		background-image: url("galaxy.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		}
+		
+		
+	
+	@font-face {
+		font-family:"myFirstFont";
+		src:url("font/BADABB__.ttf");
+	}
+
+	p{font-family:myFirstFont;
+		font-size:70px;}
+
+	#main{	
+		position:absolute;
+		left:350px;
+		top:10px;}
+		
+		.button {
+    background-color: orange; 
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+	font-weight:bold;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius:5%;
+	
+}
+button:hover{background-color:grey;}
+
+.page{
+	position: absolute;
+	visibility: hidden;
+}
+
+
+#black:hover{box-shadow: 0px 0px 20px 5px black;}
+#dblue:hover{box-shadow: 0px 0px 20px 5px darkblue;}
+#blue:hover{box-shadow: 0px 0px 20px 5px blue;}
+#lblue:hover{box-shadow: 0px 0px 20px 5px cyan;}
+#dgreen:hover{box-shadow: 0px 0px 20px 5px darkgreen;}
+#lgreen:hover{box-shadow: 0px 0px 20px 5px lime;}
+#yellow:hover{box-shadow: 0px 0px 20px 5px yellow;}
+#orange:hover{box-shadow: 0px 0px 20px 5px orange;}
+#red:hover{box-shadow: 0px 0px 20px 5px red;}
+#magenta:hover{box-shadow: 0px 0px 20px 5px magenta;}
+#pink:hover{box-shadow: 0px 0px 20px 5px pink;}
+#brown:hover{box-shadow: 0px 0px 20px 5px brown;}  
+
+	
+		img.pic { 
+		position:absolute; 
+		left:200px; 
+		top:100px; 
+		z-index:0; 
+		height:300px;
+		width:300px;
+		} 
+		
+	#home{
+		padding:20px;
+		color:white;
+		background-color:red;
+		position:relative;
+		top:800px;
+		left:1100px;
+		}
+
+	</style>
+</head>
+<body onload="init()">
+
+	<p id="main" style="color:red;text-shadow:2px 3px silver;">MARVEL COLOURING BOOK</p>
+	<div id="page0" style="visibility:visible;">
+	
+	
+	<img src="cap.png" style="height:25%;width:15%;position:absolute;top:200px;left:250px;" class="button button1"  onClick="showLayer('page1')" ></button>
+	<img src="irond.jpg"  style="height:25%;width:15%;position:absolute;top:200px;left:550px;" class="button button2" onClick="showLayer('page2')"></button>
+	<img src="wulu.jpg"  style="height:25%;width:15%;position:absolute;top:200px;left:850px;" class="button button3" onClick="showLayer('page3')"></button><br/>
+	<img src="spi.jpg"  style="height:25%;width:15%;position:absolute;top:450px;left:250px;" class="button button4" onClick="showLayer('page4')"></button>
+	<img src="thord.jpg"  style="height:25%;width:15%;position:absolute;top:450px;left:550px;" class="button button5" onClick="showLayer('page5')"></button>
+	<img src="groot.jpg"  style="height:25%;width:15%;position:absolute;top:450px;left:850px;" class="button button6" onClick="showLayer('page6')"></button>
+	<img src="white.png"  style="height:25%;width:15%;position:absolute;top:700px;left:550px;" class="button button7" onClick="showLayer('page7')"></button>
+
+	</div>
+	
+				<div id="page7" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+	<div id="page1" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="cap.png" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+		<div id="page2" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="irond.jpg" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+		<div id="page3" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="wulu.jpg" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+		<div id="page4" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="spi.jpg" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+		<div id="page5" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="thord.jpg" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:	absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+		<div id="page6" class="page" >
+		<canvas id="can" width="500" height="400" style="position:absolute;top:200px;left:400px;border:2px solid black;background:white;"></canvas>
+      <!--  <div style="position:absolute;top:12%;left:700px;color:white;">Choose Color</div>-->
+		<div style="position:absolute;top:202px;left:280px;width:200px;height:33px;background:black;" id="black" onclick="color(this)" ></div>
+		<div style="position:absolute;top:235px;left:280px;width:200px;height:35px;background:darkblue;" id="dblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:269px;left:280px;width:200px;height:36px;background:blue;" id="blue" onclick="color(this)"></div>
+		<div style="position:absolute;top:301px;left:280px;width:200px;height:34px;background:cyan;" id="lblue" onclick="color(this)"></div>
+		<div style="position:absolute;top:334px;left:280px;width:200px;height:35px;background:darkgreen;" id="dgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:368px;left:280px;width:200px;height:34px;background:lime;" id="lgreen" onclick="color(this)"></div>
+		<div style="position:absolute;top:402px;left:280px;width:200px;height:33px;background:yellow;" id="yellow" onclick="color(this)"></div>
+		<div style="position:absolute;top:435px;left:280px;width:200px;height:33px;background:orange;" id="orange" onclick="color(this)"></div>
+		<div style="position:absolute;top:468px;left:280px;width:200px;height:35px;background:red;" id="red" onclick="color(this)"></div>
+		<div style="position:absolute;top:502px;left:280px;width:200px;height:33px;background:magenta;" id="magenta" onclick="color(this)"></div>
+		<div style="position:absolute;top:535px;left:280px;width:200px;height:35px;background:pink;" id="pink" onclick="color(this)"></div>
+		<div style="position:absolute;top:569px;left:280px;width:200px;height:33px;background:brown;" id="brown" onclick="color(this)"></div>
+        <div style="position:absolute;top:520px;left:1100px;color:white;">Eraser</div>	
+        <div style="position:absolute;top:500px;left:1000px;width:50px;height:50px;background:white;border:2px solid;padding:5px;" id="white" onclick="color(this)"></div>
+      <!--    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+      <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;">-->
+	   <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:300px;left:1000px;padding:5px;"></input>
+	   	<img class="pic" src="groot.jpg" width="400" height="340" style="position:absolute;top:225px;left:502px;" />
+		<!--<img id="pencil" src="pencil.jpg" width="200" height="400" style="position:absolute;top:202px;left:282px" />-->
+	<input type="button" id="N1" value="BACK" style="position:absolute;top:300px;left:1050px;padding:5px;" onClick="showLayer('page0')"></input>
+	</div>
+	
+	<a href="marvel2.html">
+	<button id="home" > BACK TO HOME </button></a>
+	
+
+	
+</body>
+
+</html>
